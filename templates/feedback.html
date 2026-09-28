@@ -6,62 +6,994 @@ FitBuddy | Feedback
 
 {% block content %}
 
-<section class="card feedback-page">
+<section class="feedback-page">
 
-    <div class="feedback-icon">
-        📝
+
+<div class="container">
+
+    <div class="feedback-layout">
+
+
+        <!-- =================================================
+             LEFT — INTRODUCTION
+        ================================================== -->
+
+        <div class="feedback-intro fade-up">
+
+            <div class="eyebrow">
+                <span class="eyebrow-dot"></span>
+                Help Us Improve
+            </div>
+
+            <h1>
+                Your feedback
+                <span>makes FitBuddy better.</span>
+            </h1>
+
+            <p>
+                Tell us how your workout plan feels.
+                Whether something is too easy, too difficult,
+                or simply not right for your routine, your
+                feedback helps refine your experience.
+            </p>
+
+
+            <div class="feedback-points">
+
+                <div class="feedback-point">
+
+                    <div class="feedback-point-icon">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Adjust your plan
+                        </strong>
+
+                        <span>
+                            Tell us what you'd like changed.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feedback-point">
+
+                    <div class="feedback-point-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Improve your experience
+                        </strong>
+
+                        <span>
+                            Your input helps us improve FitBuddy.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feedback-point">
+
+                    <div class="feedback-point-icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Stay consistent
+                        </strong>
+
+                        <span>
+                            Build a routine that works for you.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RIGHT — FEEDBACK FORM
+        ================================================== -->
+
+        <div class="feedback-card card fade-up">
+
+            <div class="feedback-card-header">
+
+                <div class="feedback-card-icon">
+
+                    <i class="fa-regular fa-message"></i>
+
+                </div>
+
+                <div>
+
+                    <span class="heading-label">
+                        YOUR INPUT
+                    </span>
+
+                    <h2>
+                        Share your feedback
+                    </h2>
+
+                    <p>
+                        A few details are all we need.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                class="feedback-form"
+                method="post"
+                action="/submit-feedback"
+            >
+
+
+                <!-- USER ID -->
+
+                <div class="form-group">
+
+                    <label for="feedback-user-id">
+                        Your User ID
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-fingerprint"></i>
+
+                        <input
+                            id="feedback-user-id"
+                            type="text"
+                            name="user_id"
+                            placeholder="Enter your User ID"
+                            required
+                        >
+
+                    </div>
+
+                    <small class="field-help">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                        Use the same User ID you used to
+                        generate your workout plan.
+
+                    </small>
+
+                </div>
+
+
+                <!-- FEEDBACK -->
+
+                <div class="form-group">
+
+                    <label for="feedback-message">
+                        Your Feedback
+                    </label>
+
+                    <div class="feedback-textarea">
+
+                        <i class="fa-regular fa-comment-dots"></i>
+
+                        <textarea
+                            id="feedback-message"
+                            name="feedback"
+                            rows="7"
+                            maxlength="1000"
+                            placeholder="Tell us what feels too easy, too difficult, or what you'd like to change..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+                    <div class="textarea-footer">
+
+                        <small>
+                            Be specific — it helps us personalize your plan.
+                        </small>
+
+                        <span id="characterCount">
+                            0 / 1000
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    class="feedback-submit-btn"
+                    type="submit"
+                >
+
+                    <span class="submit-icon">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </span>
+
+                    <span>
+                        Submit Feedback
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right submit-arrow"></i>
+
+                </button>
+
+
+                <div class="feedback-security">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>
+                        Your feedback is used to improve your personalized experience.
+                    </span>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
 
-    <h1>
-        Share Your Feedback
-    </h1>
+</div>
 
-    <p class="subtitle">
-        Help us improve your personalized workout plan.
-        Tell FitBuddy what feels too easy, too difficult,
-        or what you would like to change.
-    </p>
-
-
-    <form
-    class="feedback-form"
-    method="post"
-    action="/submit-feedback"
-    >
-
-        <label>
-            Your Unique User ID
-
-            <input
-                type="text"
-                name="user_id"
-                placeholder="Enter the same User ID used to generate your plan"
-                required
-            >
-        </label>
-
-
-        <label>
-            Your Feedback
-
-            <textarea
-                name="feedback"
-                rows="7"
-                placeholder="Let us know how we can improve your plan..."
-                required
-            ></textarea>
-        </label>
-
-
-        <button
-            class="button"
-            type="submit"
-        >
-            🚀 Submit Feedback
-        </button>
-
-    </form>
 
 </section>
+
+<!-- =========================================================
+     FEEDBACK PAGE STYLES
+========================================================= -->
+
+<style>
+
+    .feedback-page {
+
+        min-height: 100vh;
+
+        padding:
+            80px 0 100px;
+
+        background:
+            radial-gradient(
+                circle at 8% 20%,
+                rgba(
+                    220,
+                    252,
+                    231,
+                    0.75
+                ),
+                transparent 28%
+            ),
+            radial-gradient(
+                circle at 95% 85%,
+                rgba(
+                    236,
+                    252,
+                    203,
+                    0.65
+                ),
+                transparent 25%
+            ),
+            #f8fafc;
+
+    }
+
+
+    .feedback-layout {
+
+        display: grid;
+
+        grid-template-columns:
+            minmax(0, 0.85fr)
+            minmax(450px, 1fr);
+
+        align-items: center;
+
+        gap: 90px;
+
+        max-width: 1050px;
+
+        margin: 0 auto;
+
+    }
+
+
+    /* INTRO */
+
+    .feedback-intro {
+
+        max-width: 470px;
+
+    }
+
+
+    .feedback-intro h1 {
+
+        margin-top: 22px;
+
+        font-size:
+            clamp(
+                2.6rem,
+                4.5vw,
+                4rem
+            );
+
+        line-height: 1.05;
+
+    }
+
+
+    .feedback-intro h1 span {
+
+        display: block;
+
+        color: var(--primary);
+
+    }
+
+
+    .feedback-intro > p {
+
+        margin-top: 22px;
+
+        font-size: 0.98rem;
+
+        line-height: 1.8;
+
+    }
+
+
+    /* POINTS */
+
+    .feedback-points {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 19px;
+
+        margin-top: 34px;
+
+    }
+
+
+    .feedback-point {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 13px;
+
+    }
+
+
+    .feedback-point-icon {
+
+        width: 42px;
+
+        height: 42px;
+
+        display: grid;
+
+        place-items: center;
+
+        flex-shrink: 0;
+
+        color: var(--primary);
+
+        background:
+            var(--primary-light);
+
+        border-radius: 12px;
+
+        font-size: 0.85rem;
+
+    }
+
+
+    .feedback-point div:last-child {
+
+        display: flex;
+
+        flex-direction: column;
+
+    }
+
+
+    .feedback-point strong {
+
+        color: var(--dark);
+
+        font-size: 0.84rem;
+
+    }
+
+
+    .feedback-point span {
+
+        margin-top: 2px;
+
+        color: var(--text-muted);
+
+        font-size: 0.74rem;
+
+    }
+
+
+    /* CARD */
+
+    .feedback-card {
+
+        padding: 34px;
+
+        border-radius: 24px;
+
+        box-shadow:
+            0 25px 65px
+            rgba(
+                15,
+                23,
+                42,
+                0.1
+            );
+
+    }
+
+
+    .feedback-card-header {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 14px;
+
+        margin-bottom: 28px;
+
+    }
+
+
+    .feedback-card-icon {
+
+        width: 50px;
+
+        height: 50px;
+
+        display: grid;
+
+        place-items: center;
+
+        flex-shrink: 0;
+
+        color: var(--white);
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                var(--primary-dark)
+            );
+
+        border-radius: 14px;
+
+        box-shadow:
+            0 8px 20px
+            rgba(
+                22,
+                163,
+                74,
+                0.2
+            );
+
+    }
+
+
+    .feedback-card-header h2 {
+
+        font-size: 1.45rem;
+
+    }
+
+
+    .feedback-card-header p {
+
+        margin-top: 3px;
+
+        font-size: 0.79rem;
+
+    }
+
+
+    /* FORM */
+
+    .feedback-form {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 23px;
+
+    }
+
+
+    .field-help {
+
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 5px;
+
+        margin-top: 1px;
+
+        color: var(--text-muted);
+
+        font-size: 0.68rem;
+
+        line-height: 1.5;
+
+    }
+
+
+    .field-help i {
+
+        margin-top: 2px;
+
+        color: var(--primary);
+
+    }
+
+
+    .feedback-textarea {
+
+        position: relative;
+
+    }
+
+
+    .feedback-textarea > i {
+
+        position: absolute;
+
+        top: 17px;
+
+        left: 15px;
+
+        z-index: 2;
+
+        color: var(--text-muted);
+
+        pointer-events: none;
+
+        transition: var(--transition);
+
+    }
+
+
+    .feedback-textarea textarea {
+
+        min-height: 155px;
+
+        padding-left: 43px;
+
+        line-height: 1.65;
+
+    }
+
+
+    .feedback-textarea:focus-within > i {
+
+        color: var(--primary);
+
+    }
+
+
+    .textarea-footer {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 10px;
+
+        margin-top: 5px;
+
+    }
+
+
+    .textarea-footer small {
+
+        color: var(--text-muted);
+
+        font-size: 0.67rem;
+
+    }
+
+
+    #characterCount {
+
+        color: var(--text-muted);
+
+        font-size: 0.67rem;
+
+        font-weight: 700;
+
+        white-space: nowrap;
+
+    }
+
+
+    /* SUBMIT BUTTON */
+
+    .feedback-submit-btn {
+
+        position: relative;
+
+        width: 100%;
+
+        min-height: 55px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 10px;
+
+        color: var(--white);
+
+        background:
+            linear-gradient(
+                135deg,
+                var(--primary),
+                var(--primary-dark)
+            );
+
+        border: none;
+
+        border-radius: 13px;
+
+        font-size: 0.9rem;
+
+        font-weight: 800;
+
+        box-shadow:
+            0 10px 24px
+            rgba(
+                22,
+                163,
+                74,
+                0.2
+            );
+
+        transition: var(--transition);
+
+        overflow: hidden;
+
+    }
+
+
+    .feedback-submit-btn::before {
+
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+            linear-gradient(
+                100deg,
+                transparent 20%,
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.16
+                ) 50%,
+                transparent 80%
+            );
+
+        transform:
+            translateX(-120%);
+
+        transition:
+            transform 0.65s ease;
+
+    }
+
+
+    .feedback-submit-btn:hover {
+
+        transform:
+            translateY(-2px);
+
+        box-shadow:
+            0 15px 30px
+            rgba(
+                22,
+                163,
+                74,
+                0.27
+            );
+
+    }
+
+
+    .feedback-submit-btn:hover::before {
+
+        transform:
+            translateX(120%);
+
+    }
+
+
+    .submit-icon {
+
+        width: 27px;
+
+        height: 27px;
+
+        display: grid;
+
+        place-items: center;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                0.15
+            );
+
+        border-radius: 8px;
+
+        font-size: 0.72rem;
+
+    }
+
+
+    .submit-arrow {
+
+        position: absolute;
+
+        right: 17px;
+
+        transition:
+            transform 0.25s ease;
+
+    }
+
+
+    .feedback-submit-btn:hover
+    .submit-arrow {
+
+        transform:
+            translateX(4px);
+
+    }
+
+
+    .feedback-security {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 6px;
+
+        color: var(--text-muted);
+
+        font-size: 0.66rem;
+
+        text-align: center;
+
+    }
+
+
+    .feedback-security i {
+
+        color: var(--primary);
+
+    }
+
+
+    /* TABLET */
+
+    @media (max-width: 900px) {
+
+        .feedback-layout {
+
+            grid-template-columns:
+                1fr;
+
+            gap: 45px;
+
+            max-width: 700px;
+
+        }
+
+
+        .feedback-intro {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            text-align: center;
+
+        }
+
+
+        .feedback-intro h1 span {
+
+            display: inline;
+
+        }
+
+
+        .feedback-points {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            text-align: left;
+
+        }
+
+    }
+
+
+    /* MOBILE */
+
+    @media (max-width: 650px) {
+
+        .feedback-page {
+
+            padding:
+                55px 0 70px;
+
+        }
+
+
+        .feedback-intro h1 {
+
+            font-size: 2.55rem;
+
+        }
+
+
+        .feedback-intro > p {
+
+            font-size: 0.88rem;
+
+        }
+
+
+        .feedback-points {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            text-align: left;
+
+        }
+
+
+        .feedback-card {
+
+            padding: 22px 18px;
+
+            border-radius: 20px;
+
+        }
+
+
+        .feedback-card-header {
+
+            align-items: flex-start;
+
+        }
+
+
+        .textarea-footer {
+
+            align-items: flex-start;
+
+            flex-direction: column;
+
+        }
+
+
+        .feedback-security {
+
+            align-items: flex-start;
+
+            text-align: left;
+
+        }
+
+    }
+
+</style>
+
+<!-- =========================================================
+     CHARACTER COUNTER
+========================================================= -->
+
+<script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const textarea =
+                document.getElementById(
+                    "feedback-message"
+                );
+
+            const counter =
+                document.getElementById(
+                    "characterCount"
+                );
+
+
+            if (!textarea || !counter) {
+                return;
+            }
+
+
+            function updateCounter() {
+
+                counter.textContent =
+                    textarea.value.length +
+                    " / 1000";
+
+            }
+
+
+            textarea.addEventListener(
+                "input",
+                updateCounter
+            );
+
+
+            updateCounter();
+
+        }
+    );
+
+</script>
 
 {% endblock %}

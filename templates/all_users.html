@@ -1,151 +1,1440 @@
 {% extends "base.html" %}
 
 {% block title %}
-FitBuddy | All Users
+FitBuddy | Admin Dashboard
 {% endblock %}
 
 {% block content %}
 
-<div class="users-page">
+<div class="admin-page">
 
-    <section class="users-header">
 
-        <small>
-            👑 ADMIN DASHBOARD
-        </small>
+<!-- ==================== HEADER ==================== -->
+<section class="admin-hero">
+
+    <div class="admin-hero-content">
+
+        <div class="admin-eyebrow">
+            <i class="fa-solid fa-shield-halved"></i>
+            ADMIN DASHBOARD
+        </div>
 
         <h1>
-            👥 All Users & Workout Plans
+            All Users &amp; <span>Workout Plans</span>
         </h1>
 
         <p>
-            View registered users, their original workout plans,
-            feedback, and updated workout plans.
+            Manage user profiles, workout plans, feedback,
+            and personalized plan updates from one place.
         </p>
 
-    </section>
+    </div>
+
+    <div class="admin-hero-icon">
+        <i class="fa-solid fa-users"></i>
+    </div>
+
+</section>
 
 
-    <section class="users-table-card">
+<!-- ==================== STATS ==================== -->
+<section class="admin-stats">
 
-        <div class="table-wrap">
+    <div class="admin-stat-card">
 
-            <table>
+        <div class="stat-icon">
+            <i class="fa-solid fa-users"></i>
+        </div>
 
-                <thead>
+        <div>
+            <span class="stat-label">TOTAL USERS</span>
+            <strong>{{ users|length }}</strong>
+        </div>
 
-                    <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Weight</th>
-                        <th>Goal</th>
-                        <th>Intensity</th>
-                        <th>Original Plan</th>
-                        <th>💬 Feedback</th>
-                        <th>Updated Plan</th>
-                    </tr>
+    </div>
 
-                </thead>
 
-                <tbody>
+    <div class="admin-stat-card">
 
-                    {% for u in users %}
+        <div class="stat-icon">
+            <i class="fa-solid fa-dumbbell"></i>
+        </div>
 
-                    <tr>
+        <div>
+            <span class="stat-label">WORKOUT PLANS</span>
+            <strong>{{ users|length }}</strong>
+        </div>
 
-                        <td>
-                            <strong>{{ u.user_id }}</strong>
-                        </td>
+    </div>
 
-                        <td>
-                            {{ u.name }}
-                        </td>
 
-                        <td>
-                            {{ u.age }}
-                        </td>
+    <div class="admin-stat-card">
 
-                        <td>
-                            {{ u.weight }} kg
-                        </td>
+        <div class="stat-icon">
+            <i class="fa-solid fa-comments"></i>
+        </div>
 
-                        <td>
-                            {{ u.goal }}
-                        </td>
+        <div>
+            <span class="stat-label">USER FEEDBACK</span>
 
-                        <td>
-                            {{ u.intensity }}
-                        </td>
+            <strong>
+                {% set feedback_count = 0 %}
 
-                        <td>
-                            <pre>{{ u.original_plan }}</pre>
-                        </td>
+                {% for u in users %}
+                    {% if u.feedback %}
+                        {% set feedback_count = feedback_count + 1 %}
+                    {% endif %}
+                {% endfor %}
 
-                        <td>
-
-                            {% if u.feedback %}
-
-                            <div class="feedback-box">
-
-                                <strong>
-                                    💬 User Feedback
-                                </strong>
-
-                                <p>
-                                    {{ u.feedback }}
-                                </p>
-
-                            </div>
-
-                            {% else %}
-
-                            <span class="no-feedback">
-                                No feedback yet
-                            </span>
-
-                            {% endif %}
-
-                        </td>
-
-                        <td>
-
-                            {% if u.updated_plan %}
-
-                            <pre>{{ u.updated_plan }}</pre>
-
-                            {% else %}
-
-                            <span class="no-feedback">
-                                No updated plan
-                            </span>
-
-                            {% endif %}
-
-                        </td>
-
-                    </tr>
-
-                    {% else %}
-
-                    <tr>
-
-                        <td colspan="9">
-                            No users found.
-                        </td>
-
-                    </tr>
-
-                    {% endfor %}
-
-                </tbody>
-
-            </table>
+                {{ feedback_count }}
+            </strong>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
+
+
+<!-- ==================== TABLE ==================== -->
+<section class="admin-table-card">
+
+    <div class="table-card-header">
+
+        <div>
+
+            <div class="section-label">
+                <i class="fa-solid fa-table"></i>
+                USER DATABASE
+            </div>
+
+            <h2>
+                User Workout Information
+            </h2>
+
+            <p>
+                Detailed overview of registered users and their plans.
+            </p>
+
+        </div>
+
+        <div class="record-count">
+            <i class="fa-solid fa-database"></i>
+            {{ users|length }} Records
+        </div>
+
+    </div>
+
+
+    <div class="admin-table-wrapper">
+
+        <table class="admin-users-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        <span>
+                            <i class="fa-solid fa-fingerprint"></i>
+                            User ID
+                        </span>
+                    </th>
+
+                    <th>
+                        <span>
+                            <i class="fa-solid fa-user"></i>
+                            Name
+                        </span>
+                    </th>
+
+                    <th>
+                        <span>
+                            <i class="fa-solid fa-cake-candles"></i>
+                            Age
+                        </span>
+                    </th>
+
+                    <th>
+                        <span>
+                            <i class="fa-solid fa-weight-scale"></i>
+                            Weight
+                        </span>
+                    </th>
+
+                    <th>
+                        <span>
+                            <i class="fa-solid fa-bullseye"></i>
+                            Goal
+                        </span>
+                    </th>
+
+                    <th>
+                        <span>
+                            <i class="fa-solid fa-bolt"></i>
+                            Intensity
+                        </span>
+                    </th>
+
+                    <th>
+                        <span>
+                            <i class="fa-solid fa-dumbbell"></i>
+                            Original Plan
+                        </span>
+                    </th>
+
+                    <th>
+                        <span>
+                            <i class="fa-solid fa-comment-dots"></i>
+                            Feedback
+                        </span>
+                    </th>
+
+                    <th>
+                        <span>
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                            Updated Plan
+                        </span>
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for u in users %}
+
+                <tr>
+
+                    <!-- USER ID -->
+                    <td>
+
+                        <span class="user-id-badge">
+                            #{{ u.user_id }}
+                        </span>
+
+                    </td>
+
+
+                    <!-- NAME -->
+                    <td>
+
+                        <div class="user-name-cell">
+
+                            <div class="user-avatar">
+                                {{ u.name[0]|upper }}
+                            </div>
+
+                            <strong>
+                                {{ u.name }}
+                            </strong>
+
+                        </div>
+
+                    </td>
+
+
+                    <!-- AGE -->
+                    <td>
+                        <span class="table-value">
+                            {{ u.age }}
+                        </span>
+                    </td>
+
+
+                    <!-- WEIGHT -->
+                    <td>
+
+                        <span class="weight-value">
+                            {{ u.weight }} kg
+                        </span>
+
+                    </td>
+
+
+                    <!-- GOAL -->
+                    <td>
+
+                        <span class="goal-badge">
+                            <i class="fa-solid fa-bullseye"></i>
+                            {{ u.goal }}
+                        </span>
+
+                    </td>
+
+
+                    <!-- INTENSITY -->
+                    <td>
+
+                        <span class="intensity-badge">
+                            {{ u.intensity }}
+                        </span>
+
+                    </td>
+
+
+                    <!-- ORIGINAL PLAN -->
+                    <td>
+
+                        <div class="plan-box">
+
+                            <div class="plan-box-header">
+                                <i class="fa-solid fa-file-lines"></i>
+                                Original Plan
+                            </div>
+
+                            <pre>{{ u.original_plan }}</pre>
+
+                        </div>
+
+                    </td>
+
+
+                    <!-- FEEDBACK -->
+                    <td>
+
+                        {% if u.feedback %}
+
+                        <div class="feedback-box">
+
+                            <div class="feedback-header">
+
+                                <i class="fa-solid fa-comment"></i>
+
+                                <strong>
+                                    User Feedback
+                                </strong>
+
+                            </div>
+
+                            <p>
+                                {{ u.feedback }}
+                            </p>
+
+                        </div>
+
+                        {% else %}
+
+                        <div class="empty-feedback">
+
+                            <i class="fa-regular fa-comment"></i>
+
+                            <span>
+                                No feedback yet
+                            </span>
+
+                        </div>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <!-- UPDATED PLAN -->
+                    <td>
+
+                        {% if u.updated_plan %}
+
+                        <div class="plan-box updated">
+
+                            <div class="plan-box-header">
+
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                                Updated Plan
+
+                            </div>
+
+                            <pre>{{ u.updated_plan }}</pre>
+
+                        </div>
+
+                        {% else %}
+
+                        <div class="empty-feedback">
+
+                            <i class="fa-solid fa-hourglass-half"></i>
+
+                            <span>
+                                No updated plan
+                            </span>
+
+                        </div>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+
+                {% else %}
+
+                <tr>
+
+                    <td colspan="9">
+
+                        <div class="admin-empty-state">
+
+                            <div class="empty-icon">
+                                <i class="fa-solid fa-users-slash"></i>
+                            </div>
+
+                            <h3>
+                                No Users Found
+                            </h3>
+
+                            <p>
+                                There are currently no registered users
+                                in the FitBuddy database.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
 
 </div>
+
+<!-- ==================== PAGE STYLES ==================== -->
+
+<style>
+
+.admin-page {
+    padding: 30px 0 70px;
+}
+
+
+/* ==================== HERO ==================== */
+
+.admin-hero {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 42px 46px;
+    margin-bottom: 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+
+    background:
+        radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.18), transparent 32%),
+        radial-gradient(circle at 10% 100%, rgba(34, 197, 94, 0.08), transparent 35%),
+        rgba(255, 255, 255, 0.035);
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+
+    animation: adminFadeUp 0.6s ease both;
+}
+
+
+.admin-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -100px;
+    top: -110px;
+
+    border-radius: 50%;
+
+    background: rgba(99, 102, 241, 0.08);
+}
+
+
+.admin-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+
+.admin-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 14px;
+
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+
+    color: #8b8ff8;
+}
+
+
+.admin-hero h1 {
+    margin: 0 0 12px;
+
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+}
+
+
+.admin-hero h1 span {
+    color: #8b8ff8;
+}
+
+
+.admin-hero p {
+    max-width: 700px;
+
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.62);
+
+    font-size: 0.98rem;
+    line-height: 1.7;
+}
+
+
+.admin-hero-icon {
+    position: relative;
+    z-index: 1;
+
+    width: 82px;
+    height: 82px;
+
+    flex: 0 0 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    color: #a5a8ff;
+    font-size: 2rem;
+
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(139, 143, 248, 0.18);
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.18),
+        inset 0 0 25px rgba(99, 102, 241, 0.05);
+
+    animation: adminFloat 4s ease-in-out infinite;
+}
+
+
+/* ==================== STATS ==================== */
+
+.admin-stats {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 24px;
+}
+
+
+.admin-stat-card {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.admin-stat-card:hover {
+    transform: translateY(-4px);
+
+    background: rgba(255, 255, 255, 0.055);
+
+    border-color: rgba(139, 143, 248, 0.25);
+}
+
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+
+    flex: 0 0 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(99, 102, 241, 0.12);
+
+    color: #9b9ff9;
+
+    font-size: 1.1rem;
+}
+
+
+.stat-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: rgba(255, 255, 255, 0.42);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+
+.admin-stat-card strong {
+    display: block;
+
+    font-size: 1.55rem;
+    line-height: 1;
+
+    color: #fff;
+}
+
+
+/* ==================== TABLE CARD ==================== */
+
+.admin-table-card {
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: rgba(255, 255, 255, 0.025);
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+
+    animation: adminFadeUp 0.7s ease 0.1s both;
+}
+
+
+.table-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 28px 30px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 8px;
+
+    color: #8b8ff8;
+
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.11em;
+}
+
+
+.table-card-header h2 {
+    margin: 0 0 5px;
+
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+}
+
+
+.table-card-header p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.45);
+
+    font-size: 0.86rem;
+}
+
+
+.record-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    flex-shrink: 0;
+
+    padding: 10px 14px;
+
+    border-radius: 999px;
+
+    color: rgba(255, 255, 255, 0.68);
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+/* ==================== TABLE ==================== */
+
+.admin-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+}
+
+
+.admin-users-table {
+    width: 100%;
+
+    min-width: 1500px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+
+.admin-users-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+
+    padding: 17px 16px;
+
+    text-align: left;
+    white-space: nowrap;
+
+    background: #17181f;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    color: rgba(255, 255, 255, 0.48);
+
+    font-size: 0.69rem;
+    font-weight: 800;
+
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+
+.admin-users-table thead th span {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+
+.admin-users-table thead th i {
+    color: #8b8ff8;
+    font-size: 0.72rem;
+}
+
+
+.admin-users-table tbody tr {
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.admin-users-table tbody tr:hover {
+    background: rgba(139, 143, 248, 0.035);
+}
+
+
+.admin-users-table tbody td {
+    padding: 18px 16px;
+
+    vertical-align: top;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 0.84rem;
+}
+
+
+.admin-users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ==================== USER ==================== */
+
+.user-id-badge {
+    display: inline-flex;
+
+    padding: 6px 9px;
+
+    border-radius: 8px;
+
+    color: #a6a9ff;
+
+    background: rgba(99, 102, 241, 0.1);
+
+    border: 1px solid rgba(139, 143, 248, 0.12);
+
+    font-family: monospace;
+
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+
+.user-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 150px;
+}
+
+
+.user-avatar {
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    color: #fff;
+
+    background: linear-gradient(
+        135deg,
+        #6366f1,
+        #8b5cf6
+    );
+
+    font-size: 0.8rem;
+    font-weight: 800;
+
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+}
+
+
+.table-value {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+
+.weight-value {
+    white-space: nowrap;
+
+    font-weight: 700;
+
+    color: rgba(255, 255, 255, 0.75);
+}
+
+
+/* ==================== BADGES ==================== */
+
+.goal-badge,
+.intensity-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    white-space: nowrap;
+
+    padding: 7px 10px;
+
+    border-radius: 999px;
+
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+
+.goal-badge {
+    color: #a5a8ff;
+
+    background: rgba(99, 102, 241, 0.1);
+
+    border: 1px solid rgba(99, 102, 241, 0.14);
+}
+
+
+.intensity-badge {
+    color: #86efac;
+
+    background: rgba(34, 197, 94, 0.08);
+
+    border: 1px solid rgba(34, 197, 94, 0.13);
+}
+
+
+/* ==================== PLAN BOX ==================== */
+
+.plan-box {
+    width: 360px;
+    max-width: 360px;
+
+    overflow: hidden;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+.plan-box.updated {
+    border-color: rgba(34, 197, 94, 0.14);
+
+    background: rgba(34, 197, 94, 0.025);
+}
+
+
+.plan-box-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 13px;
+
+    color: rgba(255, 255, 255, 0.58);
+
+    font-size: 0.7rem;
+    font-weight: 800;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    background: rgba(255, 255, 255, 0.025);
+}
+
+
+.plan-box.updated .plan-box-header {
+    color: #86efac;
+}
+
+
+.plan-box pre {
+    width: 100%;
+
+    max-height: 250px;
+
+    overflow: auto;
+
+    margin: 0;
+    padding: 14px;
+
+    white-space: pre-wrap;
+    word-break: break-word;
+
+    color: rgba(255, 255, 255, 0.68);
+
+    font-family: "DM Sans", sans-serif;
+
+    font-size: 0.78rem;
+    line-height: 1.65;
+
+    background: transparent;
+}
+
+
+/* ==================== FEEDBACK ==================== */
+
+.feedback-box {
+    width: 270px;
+    max-width: 270px;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    background: rgba(245, 158, 11, 0.055);
+
+    border: 1px solid rgba(245, 158, 11, 0.12);
+}
+
+
+.feedback-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 9px;
+
+    color: #fbbf24;
+
+    font-size: 0.72rem;
+}
+
+
+.feedback-box p {
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.66);
+
+    font-size: 0.78rem;
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+
+.empty-feedback {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    width: max-content;
+
+    max-width: 200px;
+
+    padding: 9px 11px;
+
+    border-radius: 10px;
+
+    color: rgba(255, 255, 255, 0.32);
+
+    background: rgba(255, 255, 255, 0.025);
+
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    font-size: 0.72rem;
+}
+
+
+/* ==================== EMPTY STATE ==================== */
+
+.admin-empty-state {
+    min-height: 280px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.empty-icon {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    border-radius: 18px;
+
+    color: #8b8ff8;
+
+    background: rgba(99, 102, 241, 0.1);
+
+    font-size: 1.4rem;
+}
+
+
+.admin-empty-state h3 {
+    margin: 0 0 6px;
+
+    font-size: 1.1rem;
+}
+
+
+.admin-empty-state p {
+    max-width: 400px;
+
+    margin: 0;
+
+    color: rgba(255, 255, 255, 0.4);
+
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+
+/* ==================== ANIMATIONS ==================== */
+
+@keyframes adminFadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes adminFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+
+}
+
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 900px) {
+
+    .admin-hero {
+        padding: 32px;
+    }
+
+    .admin-stats {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .admin-page {
+        padding-top: 15px;
+    }
+
+    .admin-hero {
+        padding: 26px 22px;
+
+        border-radius: 18px;
+    }
+
+    .admin-hero-icon {
+        display: none;
+    }
+
+    .table-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+
+        padding: 22px;
+    }
+
+    .record-count {
+        width: 100%;
+        justify-content: center;
+    }
+
+}
+
+/* ==================== LIGHT THEME TEXT FIX ==================== */
+
+.admin-page {
+color: #1f2937;
+}
+
+.admin-hero {
+background:
+radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.10), transparent 32%),
+radial-gradient(circle at 10% 100%, rgba(34, 197, 94, 0.06), transparent 35%),
+#ffffff;
+
+
+border-color: #e5e7eb;
+
+
+}
+
+.admin-hero h1 {
+color: #111827;
+}
+
+.admin-hero p {
+color: #6b7280;
+}
+
+.admin-eyebrow {
+color: #6366f1;
+}
+
+.admin-hero-icon {
+background: rgba(99, 102, 241, 0.08);
+border-color: rgba(99, 102, 241, 0.15);
+color: #6366f1;
+}
+
+/* STAT CARDS */
+
+.admin-stat-card {
+background: #ffffff;
+border-color: #e5e7eb;
+box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.admin-stat-card:hover {
+background: #ffffff;
+border-color: rgba(99, 102, 241, 0.25);
+}
+
+.stat-label {
+color: #6b7280;
+}
+
+.admin-stat-card strong {
+color: #111827;
+}
+
+.stat-icon {
+background: rgba(99, 102, 241, 0.09);
+color: #6366f1;
+}
+
+/* TABLE CARD */
+
+.admin-table-card {
+background: #ffffff;
+border-color: #e5e7eb;
+box-shadow: 0 10px 35px rgba(15, 23, 42, 0.07);
+}
+
+.table-card-header {
+border-bottom-color: #e5e7eb;
+}
+
+.table-card-header h2 {
+color: #111827;
+}
+
+.table-card-header p {
+color: #6b7280;
+}
+
+.section-label {
+color: #6366f1;
+}
+
+.record-count {
+color: #4b5563;
+background: #f8fafc;
+border-color: #e5e7eb;
+}
+
+/* TABLE */
+
+.admin-users-table thead th {
+background: #f8fafc;
+color: #6b7280;
+border-bottom-color: #e5e7eb;
+}
+
+.admin-users-table thead th i {
+color: #6366f1;
+}
+
+.admin-users-table tbody tr:hover {
+background: #f8fafc;
+}
+
+.admin-users-table tbody td {
+color: #374151;
+border-bottom-color: #eef0f3;
+}
+
+/* USER DETAILS */
+
+.user-id-badge {
+color: #4f46e5;
+background: #eef2ff;
+border-color: #e0e7ff;
+}
+
+.user-name-cell strong {
+color: #1f2937;
+}
+
+.table-value {
+color: #374151;
+}
+
+.weight-value {
+color: #374151;
+}
+
+/* BADGES */
+
+.goal-badge {
+color: #4f46e5;
+background: #eef2ff;
+border-color: #e0e7ff;
+}
+
+.intensity-badge {
+color: #15803d;
+background: #f0fdf4;
+border-color: #dcfce7;
+}
+
+/* PLAN BOX */
+
+.plan-box {
+background: #f8fafc;
+border-color: #e5e7eb;
+}
+
+.plan-box.updated {
+background: #f0fdf4;
+border-color: #dcfce7;
+}
+
+.plan-box-header {
+color: #4b5563;
+background: #f1f5f9;
+border-bottom-color: #e5e7eb;
+}
+
+.plan-box.updated .plan-box-header {
+color: #15803d;
+}
+
+.plan-box pre {
+color: #374151;
+}
+
+/* FEEDBACK */
+
+.feedback-box {
+background: #fffbeb;
+border-color: #fde68a;
+}
+
+.feedback-header {
+color: #b45309;
+}
+
+.feedback-box p {
+color: #4b5563;
+}
+
+.empty-feedback {
+color: #9ca3af;
+background: #f9fafb;
+border-color: #e5e7eb;
+}
+
+/* EMPTY STATE */
+
+.admin-empty-state h3 {
+color: #111827;
+}
+
+.admin-empty-state p {
+color: #6b7280;
+}
+
+.empty-icon {
+background: #eef2ff;
+color: #6366f1;
+}
+
+</style>
+
+
+<!-- ==================== PAGE SCRIPT ==================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const rows = document.querySelectorAll(
+        ".admin-users-table tbody tr"
+    );
+
+    rows.forEach(function (row, index) {
+
+        row.style.opacity = "0";
+
+        row.style.transform = "translateY(8px)";
+
+        setTimeout(function () {
+
+            row.style.transition =
+                "opacity 0.35s ease, transform 0.35s ease";
+
+            row.style.opacity = "1";
+
+            row.style.transform = "translateY(0)";
+
+        }, 80 + (index * 45));
+
+    });
+
+
+    /* Prevent long plan text from making the page too heavy */
+
+    const planBoxes = document.querySelectorAll(
+        ".plan-box pre"
+    );
+
+    planBoxes.forEach(function (box) {
+
+        box.addEventListener("dblclick", function () {
+
+            if (box.requestFullscreen) {
+                box.requestFullscreen();
+            }
+
+        });
+
+    });
+
+});
+
+</script>
 
 {% endblock %}
